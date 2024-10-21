@@ -2706,17 +2706,30 @@ do
         Parent = ScreenGui;
     });
 
+
     local WatermarkInner = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor;
-        BorderColor3 = Library.AccentColor;
+        --BorderColor3 = Library.AccentColor;
         BorderMode = Enum.BorderMode.Inset;
         Size = UDim2.new(1, 0, 1, 0);
         ZIndex = 201;
         Parent = WatermarkOuter;
     });
 
+    local ColorFrame22 = Library:Create('Frame', {
+        BackgroundColor3 = Library.AccentColor;
+        BorderSizePixel = 0;
+        Size = UDim2.new(1, 0, 0, 2);
+        ZIndex = 302;
+        Parent = WatermarkInner;
+    });
+
+    Library:AddToRegistry(ColorFrame22, {
+        BackgroundColor3 = 'AccentColor';
+    }, true);
+
     Library:AddToRegistry(WatermarkInner, {
-        BorderColor3 = 'AccentColor';
+        --BorderColor3 = 'AccentColor';
     });
 
     local InnerFrame = Library:Create('Frame', {
@@ -2978,6 +2991,7 @@ function Library:CreateWindow(...)
         BackgroundColor3 = Library.MainColor;
         --BorderColor3 = Library.AccentColor;
         BorderMode = Enum.BorderMode.Inset;
+        BorderSizePixel = 0;
         Position = UDim2.new(0, 1, 0, 1);
         Size = UDim2.new(1, -2, 1, -2);
         ZIndex = 1;
