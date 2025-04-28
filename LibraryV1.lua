@@ -46,7 +46,7 @@ local Library = {
     ScreenGui = ScreenGui
 }
 
-local library2 = {}
+local Library2 = {}
 -- Font system
 if not isfolder("syphon/fonts") then
     makefolder("syphon/fonts")
