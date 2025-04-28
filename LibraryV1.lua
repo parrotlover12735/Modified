@@ -46,7 +46,7 @@ local Library = {
     ScreenGui = ScreenGui
 }
 
-local Library2 = {}
+local Library2 = table.clone(Library)
 -- Font system
 if not isfolder("syphon/fonts") then
     makefolder("syphon/fonts")
