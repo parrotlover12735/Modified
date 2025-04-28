@@ -24,27 +24,55 @@ getgenv().Toggles = Toggles;
 getgenv().Options = Options;
 
 local Library = {
-    Registry = {};
-    RegistryMap = {};
+    Registry = {},
+    RegistryMap = {},
 
-    HudRegistry = {};
+    HudRegistry = {},
 
-    FontColor = Color3.fromRGB(255, 255, 255);
-    MainColor = Color3.fromRGB(28, 28, 28);
-    BackgroundColor = Color3.fromRGB(31, 31, 31);
-    AccentColor = Color3.fromRGB(197, 216, 255);
-    OutlineColor = Color3.fromRGB(44, 44, 44);
+    FontColor = Color3.fromRGB(255, 255, 255),
+    MainColor = Color3.fromRGB(28, 28, 28),
+    BackgroundColor = Color3.fromRGB(31, 31, 31),
+    AccentColor = Color3.fromRGB(197, 216, 255),
+    OutlineColor = Color3.fromRGB(44, 44, 44),
     RiskColor = Color3.fromRGB(255, 50, 50),
 
-    Black = Color3.new(0, 0, 0);
+    Black = Color3.new(0, 0, 0),
     Font = Enum.Font.Code,
 
-    OpenedFrames = {};
-    DependencyBoxes = {};
+    OpenedFrames = {},
+    DependencyBoxes = {},
 
-    Signals = {};
-    ScreenGui = ScreenGui;
-};
+    Signals = {},
+    ScreenGui = ScreenGui
+}
+
+-- Font system
+if not isfolder("syphon/fonts") then
+    makefolder("syphon/fonts")
+end
+
+if not isfile("syphon/fonts/main.ttf") then
+    writefile("syphon/fonts/main.ttf", game:HttpGet("https://github.com/f1nobe7650/Nebula/raw/refs/heads/main/fs-tahoma-8px.ttf"))
+end
+
+local tahoma = {
+    name = "Tahoma",
+    faces = {
+        {
+            name = "Regular",
+            weight = 400,
+            style = "normal",
+            assetId = getcustomasset("syphon/fonts/main.ttf")
+        }
+    }
+}
+
+if not isfile("syphon/fonts/main_encoded.ttf") then
+    writefile("syphon/fonts/main_encoded.ttf", game:GetService("HttpService"):JSONEncode(tahoma))
+end
+
+Library.Font = Font.new(getcustomasset("syphon/fonts/main_encoded.ttf"), Enum.FontWeight.Regular)
+
 
 local RainbowStep = 0
 local Hue = 0
