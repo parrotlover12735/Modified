@@ -46,6 +46,7 @@ local Library = {
     ScreenGui = ScreenGui
 }
 
+local library2 = {}
 -- Font system
 if not isfolder("syphon/fonts") then
     makefolder("syphon/fonts")
@@ -71,7 +72,7 @@ if not isfile("syphon/fonts/main_encoded.ttf") then
     writefile("syphon/fonts/main_encoded.ttf", game:GetService("HttpService"):JSONEncode(tahoma))
 end
 
-Library.Font = Font.new(getcustomasset("syphon/fonts/main_encoded.ttf"), Enum.FontWeight.Regular)
+Library2.Font = Font.new(getcustomasset("syphon/fonts/main_encoded.ttf"), Enum.FontWeight.Regular)
 
 
 local RainbowStep = 0
@@ -174,8 +175,8 @@ end;
 function Library:CreateLabel(Properties, IsHud)
     local _Instance = Library:Create('TextLabel', {
         BackgroundTransparency = 1;
-        Font = Library.Font;
-        TextColor3 = Library.FontColor;
+        Font = Library2.Font;
+        TextColor3 = Library2.FontColor;
         TextSize = 16;
         TextStrokeTransparency = 0;
     });
@@ -218,7 +219,7 @@ function Library:MakeDraggable(Instance, Cutoff)
 end;
 
 function Library:AddToolTip(InfoStr, HoverInstance)
-    local X, Y = Library:GetTextBounds(InfoStr, Library.Font, 14);
+    local X, Y = Library:GetTextBounds(InfoStr, Library2.Font, 14);
     local Tooltip = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor,
         BorderColor3 = Library.OutlineColor,
@@ -235,7 +236,7 @@ function Library:AddToolTip(InfoStr, HoverInstance)
         Size = UDim2.fromOffset(X, Y);
         TextSize = 14;
         Text = InfoStr,
-        TextColor3 = Library.FontColor,
+        TextColor3 = Library2.FontColor,
         TextXAlignment = Enum.TextXAlignment.Left;
         ZIndex = Tooltip.ZIndex + 1,
 
@@ -618,11 +619,11 @@ do
             BackgroundTransparency = 1;
             Position = UDim2.new(0, 5, 0, 0);
             Size = UDim2.new(1, -5, 1, 0);
-            Font = Library.Font;
+            Font = Library2.Font;
             PlaceholderColor3 = Color3.fromRGB(190, 190, 190);
             PlaceholderText = 'Hex color',
             Text = '#FFFFFF',
-            TextColor3 = Library.FontColor;
+            TextColor3 = Library2.FontColor;
             TextSize = 14;
             TextStrokeTransparency = 0;
             TextXAlignment = Enum.TextXAlignment.Left;
@@ -641,7 +642,7 @@ do
         local RgbBox = Library:Create(RgbBoxBase.Frame:FindFirstChild('TextBox'), {
             Text = '255, 255, 255',
             PlaceholderText = 'RGB color',
-            TextColor3 = Library.FontColor
+            TextColor3 = Library2.FontColor
         });
 
         local TransparencyBoxOuter, TransparencyBoxInner, TransparencyCursor;
@@ -1157,7 +1158,7 @@ do
             function ModeButton:Deselect()
                 KeyPicker.Mode = nil;
 
-                Label.TextColor3 = Library.FontColor;
+                Label.TextColor3 = Library2.FontColor;
                 Library.RegistryMap[Label].Properties.TextColor3 = 'FontColor';
             end;
 
@@ -1185,7 +1186,7 @@ do
             ContainerLabel.Text = string.format('[%s] %s (%s)', KeyPicker.Value, Info.Text, KeyPicker.Mode);
 
             ContainerLabel.Visible = true;
-            ContainerLabel.TextColor3 = State and Library.AccentColor or Library.FontColor;
+            ContainerLabel.TextColor3 = State and Library.AccentColor or Library2.FontColor;
 
             Library.RegistryMap[ContainerLabel].Properties.TextColor3 = State and 'AccentColor' or 'FontColor';
 
@@ -1397,7 +1398,7 @@ do
         });
 
         if DoesWrap then
-            local Y = select(2, Library:GetTextBounds(Text, Library.Font, 14, Vector2.new(TextLabel.AbsoluteSize.X, math.huge)))
+            local Y = select(2, Library:GetTextBounds(Text, Library2.Font, 14, Vector2.new(TextLabel.AbsoluteSize.X, math.huge)))
             TextLabel.Size = UDim2.new(1, -4, 0, Y)
         else
             Library:Create('UIListLayout', {
@@ -1416,7 +1417,7 @@ do
             TextLabel.Text = Text
 
             if DoesWrap then
-                local Y = select(2, Library:GetTextBounds(Text, Library.Font, 14, Vector2.new(TextLabel.AbsoluteSize.X, math.huge)))
+                local Y = select(2, Library:GetTextBounds(Text, Library2.Font, 14, Vector2.new(TextLabel.AbsoluteSize.X, math.huge)))
                 TextLabel.Size = UDim2.new(1, -4, 0, Y)
             end
 
@@ -1554,7 +1555,7 @@ do
                     Library:RemoveFromRegistry(Button.Label)
                     Library:AddToRegistry(Button.Label, { TextColor3 = 'FontColor' })
 
-                    Button.Label.TextColor3 = Library.FontColor
+                    Button.Label.TextColor3 = Library2.FontColor
                     Button.Label.Text = Button.Text
                     task.defer(rawset, Button, 'Locked', false)
 
@@ -1741,12 +1742,12 @@ do
             Position = UDim2.fromOffset(0, 0),
             Size = UDim2.fromScale(5, 1),
 
-            Font = Library.Font;
+            Font = Library2.Font;
             PlaceholderColor3 = Color3.fromRGB(190, 190, 190);
             PlaceholderText = Info.Placeholder or '';
 
             Text = Info.Default or '';
-            TextColor3 = Library.FontColor;
+            TextColor3 = Library2.FontColor;
             TextSize = 14;
             TextStrokeTransparency = 0;
             TextXAlignment = Enum.TextXAlignment.Left;
@@ -2453,7 +2454,7 @@ do
                         Selected = Dropdown.Value == Value;
                     end;
 
-                    ButtonLabel.TextColor3 = Selected and Library.AccentColor or Library.FontColor;
+                    ButtonLabel.TextColor3 = Selected and Library.AccentColor or Library2.FontColor;
                     Library.RegistryMap[ButtonLabel].Properties.TextColor3 = Selected and 'AccentColor' or 'FontColor';
                 end;
 
@@ -2877,7 +2878,7 @@ function Library:SetWatermarkVisibility(Bool)
 end;
 
 function Library:SetWatermark(Text)
-    local X, Y = Library:GetTextBounds(Text, Library.Font, 14);
+    local X, Y = Library:GetTextBounds(Text, Library2.Font, 14);
     Library.Watermark.Size = UDim2.new(0, X + 15, 0, (Y * 1.5) + 3);
     Library:SetWatermarkVisibility(true)
 
@@ -2885,7 +2886,7 @@ function Library:SetWatermark(Text)
 end;
 
 function Library:Notify(Text, Time)
-    local XSize, YSize = Library:GetTextBounds(Text, Library.Font, 14);
+    local XSize, YSize = Library:GetTextBounds(Text, Library2.Font, 14);
 
     YSize = YSize + 7
 
@@ -3108,7 +3109,7 @@ function Library:CreateWindow(...)
             Tabboxes = {};
         };
 
-        local TabButtonWidth = Library:GetTextBounds(Name, Library.Font, 16);
+        local TabButtonWidth = Library:GetTextBounds(Name, Library2.Font, 16);
 
         local TabButton = Library:Create('Frame', {
             BackgroundColor3 = Library.BackgroundColor;
